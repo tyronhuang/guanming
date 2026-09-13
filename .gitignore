@@ -1,0 +1,9 @@
+# 部署產物（由 scripts/build-dist.sh 產生，GitHub Actions 會自動建置）
+dist/
+
+# 開發工具與原始資料
+build/node_modules/
+build/Unihan.zip
+
+# 本機設定
+.claude/settings.local.json

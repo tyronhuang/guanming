@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>觀命識己｜星座・八字・紫微斗數・姓名學・稱骨</title>
+  <meta name="description" content="輸入姓名與生日，一次算出西洋星座、生肖、八字命盤、紫微斗數、姓名學五格與袁天罡稱骨，認識自己。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="seal" aria-hidden="true">命</div>
+    <div>
+      <h1>觀命・識己</h1>
+      <p class="sub">西洋星座 · 生肖 · 八字 · 紫微斗數 · 姓名學 · 袁天罡稱骨 · 農民曆</p>
+    </div>
+  </header>
+
+  <main>
+    <form id="form" class="card form" autocomplete="off" novalidate>
+      <div class="row">
+        <label class="field">
+          <span>姓</span>
+          <input id="surname" maxlength="2" placeholder="例：陳、歐陽">
+        </label>
+        <label class="field grow">
+          <span>名</span>
+          <input id="given" maxlength="3" placeholder="例：雅婷">
+        </label>
+        <div class="field">
+          <span>性別</span>
+          <div class="seg" role="radiogroup" aria-label="性別">
+            <label><input type="radio" name="gender" value="男" checked><b>男</b></label>
+            <label><input type="radio" name="gender" value="女"><b>女</b></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <span>曆法</span>
+          <div class="seg" role="radiogroup" aria-label="曆法">
+            <label><input type="radio" name="calendar" value="solar" checked><b>國曆</b></label>
+            <label><input type="radio" name="calendar" value="lunar"><b>農曆</b></label>
+          </div>
+        </div>
+        <label class="field grow" id="solarBox">
+          <span>出生日期（國曆）</span>
+          <input id="solarDate" type="date" min="1900-01-31" max="2100-12-31" value="1990-01-01">
+        </label>
+        <div class="field grow" id="lunarBox" hidden>
+          <span>出生日期（農曆）</span>
+          <div class="inline">
+            <input id="lYear" type="number" min="1900" max="2100" value="1990" aria-label="農曆年"><em>年</em>
+            <select id="lMonth" aria-label="農曆月"></select><em>月</em>
+            <select id="lDay" aria-label="農曆日"></select><em>日</em>
+            <label class="check"><input id="lLeap" type="checkbox">閏月</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          <span>出生時間</span>
+          <input id="birthTime" type="time" value="12:00">
+        </label>
+        <label class="check tall"><input id="hourUnknown" type="checkbox">不知道出生時辰</label>
+        <div class="hint grow" id="timeHint">時辰：午時（11:00–13:00）</div>
+      </div>
+
+      <p class="error" id="error" role="alert" hidden></p>
+      <button class="primary" type="submit">開始排盤</button>
+    </form>
+
+    <section id="result" hidden>
+      <nav class="tabs" role="tablist" id="tabs"></nav>
+      <div id="panels"></div>
+      <div class="actions">
+        <button type="button" class="ghost" id="printBtn">列印 / 另存 PDF</button>
+        <button type="button" class="ghost" id="editBtn">重新輸入</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>本網站所有命理結果依傳統術數規則推算，僅供娛樂與自我探索參考，不構成任何醫療、財務或人生決策建議。</p>
+    <p class="credits">曆法與八字：lunar-javascript（6tail）｜紫微斗數排盤：iztro｜康熙筆畫：Unicode Unihan 資料庫</p>
+  </footer>
+
+  <script src="js/vendor/lunar.js"></script>
+  <script src="js/vendor/iztro.min.js"></script>
+  <script src="js/data/strokes.js"></script>
+  <script src="js/data/texts.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

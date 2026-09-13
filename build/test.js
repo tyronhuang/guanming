@@ -1,0 +1,14 @@
+global.window = globalThis;
+Object.assign(globalThis, require('lunar-javascript'));
+globalThis.iztro = require('iztro');
+require('../js/data/strokes.js'); require('../js/data/texts.js'); require('../js/calc.js');
+const r = FT.analyze({ surname: '陳', given: '雅婷', gender: '女', calendar: 'solar', year: 1990, month: 5, day: 17, hour: 10, minute: 30 }, new Date('2026-09-13'));
+const { bazi, ziwei, ...rest } = r;
+console.log(JSON.stringify(rest, null, 1));
+const { cols, dayun, ...b } = bazi;
+console.log(JSON.stringify(b), JSON.stringify(cols[0]), JSON.stringify(dayun[0]));
+console.log(JSON.stringify(ziwei.info), ziwei.soulStars.map(s=>s.name), ziwei.mutagens.map(m=>m.name+m.mutagen+'@'+m.palace), JSON.stringify(ziwei.keyPalaces.map(k=>k.name+':'+k.stars.map(s=>s.name))));
+const r2 = FT.analyze({ surname: '歐陽', given: '娜', gender: '男', calendar: 'lunar', year: 1984, month: 10, day: 5, leap: true, hourUnknown: true }, new Date('2026-09-13'));
+console.log(r2.solar, r2.lunarText, r2.bazi.cols.length, r2.bone, r2.ziwei, JSON.stringify(r2.name.ge.map(g=>g.name+g.n+g.luck)), r2.taisui);
+const r3 = FT.analyze({ surname: 'ab', given: '', gender: '男', calendar: 'solar', year: 2000, month: 1, day: 1, hour: 23, minute: 30 });
+console.log(r3.name, r3.bone.text, r3.ziwei.info.time, r3.western.name);
