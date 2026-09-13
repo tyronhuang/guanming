@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 
 rm -rf dist
 mkdir -p dist
-cp index.html dist/
+cp index.html match.html dist/
 cp -r css js dist/
 touch dist/.nojekyll
 

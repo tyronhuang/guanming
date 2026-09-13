@@ -1,0 +1,48 @@
+/* 合婚頁面 */
+.couple { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-bottom: 14px; }
+fieldset.person { margin: 0; min-width: 0; padding-top: 14px; }
+.person .surname { width: 7em; }
+.person .lyear { width: 6.2em; }
+.person legend { float: left; margin-bottom: 12px; }
+.person legend + * { clear: both; }
+.person.g, .profile.g { border-top: 3px solid var(--water); }
+.person.b, .profile.b { border-top: 3px solid var(--red); }
+.badge { display: inline-block; padding: 1px 14px; border-radius: 99px; color: #fff7ec; font: 600 15px/1.8 var(--serif); letter-spacing: .2em; }
+.badge.g { background: var(--water); }
+.badge.b { background: var(--red); }
+
+.score-hero { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.ring { width: 170px; height: 170px; flex: none; margin: 0 auto; }
+.ring .bgc { stroke: var(--line); }
+.ring .fg { stroke: var(--red); }
+.ring .num { font: 900 42px var(--serif); fill: var(--ink); }
+.ring .unit { font-size: 13px; fill: var(--ink-soft); }
+.score-text { flex: 1 1 320px; }
+.couple-names { font: 600 18px/1.5 var(--serif); margin: 0; }
+.heart { color: var(--red); margin: 0 6px; }
+.grade { font: 900 clamp(30px, 6vw, 44px)/1.3 var(--serif); color: var(--red); letter-spacing: .18em; }
+
+.profile h3 { display: flex; align-items: center; gap: 10px; }
+.profile a { color: var(--red); }
+
+.section-title { font-size: 22px; margin: 28px 0 12px; letter-spacing: .08em; }
+.method .mhead { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.method .mhead h3 { margin: 0; flex: 1; }
+.cat { font-size: 12px; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px; padding: 0 8px; white-space: nowrap; }
+.vs { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0 10px; font-family: var(--serif); flex-wrap: wrap; text-align: center; }
+.vs b { font-size: 17px; }
+.vs b.g { color: var(--water); }
+.vs b.b { color: var(--red); }
+.vs .x { color: var(--ink-soft); font-size: 12px; }
+.mbar { display: grid; grid-template-columns: 1fr 2.4em; align-items: center; gap: 10px; margin-bottom: 8px; }
+.mbar .track { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.mbar .fill { height: 100%; border-radius: 4px; background: var(--red); }
+.mbar span { font: 600 17px/1 var(--serif); text-align: right; }
+.luck.大吉 { background: var(--red); }
+.luck.磨合 { background: var(--ink-soft); }
+.tips ul { margin: 0; padding-left: 1.3em; }
+.tips li { margin-bottom: 6px; }
+
+@media print {
+  #form { display: none !important; }
+}

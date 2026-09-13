@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>觀命合婚｜新郎新娘八字、生肖、紫微、星座配對</title>
+  <meta name="description" content="輸入新郎新娘的姓名與生日，以生肖、八字、納音、東西四命、紫微斗數、姓名學、星座與生命靈數綜合分析兩人是否匹配。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/match.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="seal" aria-hidden="true">緣</div>
+    <div>
+      <h1>觀命・合婚</h1>
+      <p class="sub">生肖 · 八字合婚 · 納音 · 東西四命 · 紫微斗數 · 姓名學 · 星座 · 生命靈數</p>
+    </div>
+    <nav class="topnav" aria-label="頁面">
+      <a href="index.html">個人命盤</a>
+      <a href="match.html" aria-current="page">合婚配對</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="form" class="form" autocomplete="off" novalidate>
+      <div class="couple" id="couple"></div>
+      <p class="error" id="error" role="alert" hidden></p>
+      <button class="primary" type="submit">開始合婚</button>
+    </form>
+
+    <section id="result" hidden></section>
+  </main>
+
+  <footer>
+    <p>合婚結果依傳統術數規則推算，僅供娛樂參考。感情與婚姻的幸福取決於雙方的尊重、溝通與經營，請勿以此作為決定婚姻的依據。</p>
+    <p class="credits">曆法與八字：lunar-javascript（6tail）｜紫微斗數排盤：iztro｜康熙筆畫：Unicode Unihan 資料庫</p>
+  </footer>
+
+  <script src="js/vendor/lunar.js"></script>
+  <script src="js/vendor/iztro.min.js"></script>
+  <script src="js/data/strokes.js"></script>
+  <script src="js/data/texts.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/match-calc.js"></script>
+  <script src="js/match.js"></script>
+</body>
+</html>

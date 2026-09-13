@@ -62,6 +62,11 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 16px 40px; }
 }
 .hero h1 { margin: 0; font-size: clamp(28px, 5vw, 40px); letter-spacing: .12em; font-weight: 900; }
 .hero .sub { margin: 2px 0 0; color: var(--ink-soft); letter-spacing: .05em; font-size: 14px; }
+.hero { flex-wrap: wrap; }
+.topnav { margin-left: auto; display: flex; gap: 4px; }
+.topnav a { color: var(--ink-soft); text-decoration: none; font-family: var(--serif); padding: 6px 14px; border-radius: 8px; border: 1px solid transparent; }
+.topnav a:hover { border-color: var(--line); color: var(--ink); }
+.topnav a[aria-current="page"] { background: var(--ink); color: var(--paper); }
 
 /* ── Cards & form ── */
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 20px; }

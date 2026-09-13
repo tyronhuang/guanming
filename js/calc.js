@@ -156,18 +156,42 @@
     return { parts, total, text: liang(total), verse, summary: sum ? sum[2] : '' };
   }
 
+  // ── 地支關係（合、沖、刑、害、破） ──
+  const LIUHE = ['子丑', '寅亥', '卯戌', '辰酉', '巳申', '午未'];
+  const SANHE = ['申子辰', '寅午戌', '巳酉丑', '亥卯未'];
+  const XING = ['寅巳', '巳申', '申寅', '丑戌', '戌未', '未丑', '子卯'];
+  const HAI = ['子未', '丑午', '寅巳', '卯辰', '申亥', '酉戌'];
+  const PO = ['子酉', '卯午', '辰丑', '未戌', '寅亥', '巳申'];
+  function branchRelations(a, b) {
+    const has = (list) => list.some((p) => (p[0] === a && p[1] === b) || (p[0] === b && p[1] === a));
+    const tags = [];
+    if (a === b) tags.push('同');
+    if (has(LIUHE)) tags.push('六合');
+    if (a !== b && SANHE.some((g) => g.includes(a) && g.includes(b))) tags.push('三合');
+    if ((ZHI.indexOf(a) + 6) % 12 === ZHI.indexOf(b)) tags.push('沖');
+    if (has(XING) || (a === b && '辰午酉亥'.includes(a))) tags.push('刑');
+    if (has(HAI)) tags.push('害');
+    if (has(PO)) tags.push('破');
+    return tags;
+  }
+
   // ── 太歲 ──
   function taiSui(birthZhi, yearZhi) {
-    const b = ZHI.indexOf(birthZhi), y = ZHI.indexOf(yearZhi);
-    const res = [];
-    if (b === y) res.push('值太歲');
-    if ((b + 6) % 12 === y) res.push('沖太歲');
-    const pair = (list) => list.some(([p, q]) => (ZHI[b] === p && ZHI[y] === q) || (ZHI[b] === q && ZHI[y] === p));
-    const xing = [['寅', '巳'], ['巳', '申'], ['申', '寅'], ['丑', '戌'], ['戌', '未'], ['未', '丑'], ['子', '卯']];
-    if (pair(xing) || (b === y && '辰午酉亥'.includes(ZHI[b]))) res.push('刑太歲');
-    if (pair([['子', '未'], ['丑', '午'], ['寅', '巳'], ['卯', '辰'], ['申', '亥'], ['酉', '戌']])) res.push('害太歲');
-    if (pair([['子', '酉'], ['卯', '午'], ['辰', '丑'], ['未', '戌'], ['寅', '亥'], ['巳', '申']])) res.push('破太歲');
-    return res;
+    const label = { 同: '值太歲', 沖: '沖太歲', 刑: '刑太歲', 害: '害太歲', 破: '破太歲' };
+    return branchRelations(birthZhi, yearZhi).map((t) => label[t]).filter(Boolean);
+  }
+
+  // ── 輸入檢查 ──
+  function validateInput(input) {
+    if (!(input.year >= 1900 && input.year <= 2100)) throw new Error('出生年份請介於 1900 至 2100 年。');
+    if (input.calendar !== 'lunar') return;
+    const CN = '正二三四五六七八九十冬臘';
+    const leapMonth = root.LunarYear.fromYear(input.year).getLeapMonth();
+    if (input.leap && leapMonth !== input.month) {
+      throw new Error(`農曆 ${input.year} 年沒有閏${CN[input.month - 1]}月${leapMonth ? `（該年閏${CN[leapMonth - 1]}月）` : ''}。`);
+    }
+    const days = root.LunarMonth.fromYm(input.year, input.leap ? -input.month : input.month).getDayCount();
+    if (input.day > days) throw new Error(`該農曆月只有 ${days} 天。`);
   }
   function zodiacRelations(zhi) {
     const i = ZHI.indexOf(zhi);
@@ -366,5 +390,8 @@
     return result;
   }
 
-  root.FT = { analyze, toTrad, kangxiStrokes, nameology, boneWeight, taiSui, westernSign, lifePath, GAN, ZHI, WX, GAN_WX, ZHI_WX, relation };
+  root.FT = {
+    analyze, validateInput, toTrad, kangxiStrokes, nameology, boneWeight, taiSui, branchRelations, westernSign, lifePath,
+    relation, shengOf, keOf, shengBy, keBy, GAN, ZHI, ZODIAC, WX, GAN_WX, ZHI_WX
+  };
 })(typeof window !== 'undefined' ? window : globalThis);

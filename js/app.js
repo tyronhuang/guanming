@@ -51,15 +51,7 @@
       input.year = Number($('lYear').value); input.month = Number(lMonth.value);
       input.day = Number(lDay.value); input.leap = $('lLeap').checked;
     }
-    if (!(input.year >= 1900 && input.year <= 2100)) throw new Error('出生年份請介於 1900 至 2100 年。');
-    if (calendar === 'lunar') {
-      const ly = LunarYear.fromYear(input.year);
-      if (input.leap && ly.getLeapMonth() !== input.month) {
-        throw new Error(`農曆 ${input.year} 年沒有閏${CN_MONTH[input.month - 1]}月${ly.getLeapMonth() ? `（該年閏${CN_MONTH[ly.getLeapMonth() - 1]}月）` : ''}。`);
-      }
-      const days = LunarMonth.fromYm(input.year, input.leap ? -input.month : input.month).getDayCount();
-      if (input.day > days) throw new Error(`該農曆月只有 ${days} 天。`);
-    }
+    FT.validateInput(input);
     const [h, m] = ($('birthTime').value || '12:00').split(':').map(Number);
     input.hour = h; input.minute = m;
     if (input.given && !input.surname) throw new Error('請輸入姓氏。');
